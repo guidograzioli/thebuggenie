@@ -4961,10 +4961,9 @@
 				'created_at' => $this->getPosted(),
 				'updated_at' => $this->getLastUpdatedTime(),
 				'title' => $this->getTitle(),
-				'issuetype' => ($this->getIssueType() instanceof TBGIssueType) ? $this.getIssueType()->toJSON() : null,
-				'posted_by' => ($this->getPostedBy() instanceof TBGIdentifiable) ? $this->getPostedBy()->toJSON() : null,
-				'assignee' => ($this->getAssignee() instanceof TBGIdentifiable) ? $this->getAssignee()->toJSON() : null,
-				'status' => ($this->getStatus() instanceof TBGIdentifiable) ? $this->getStatus()->toJSON() : null,
+				'issuetype' => ($this->getIssueType() instanceof TBGIssueType) ? $this->getIssueType()->getName() : null,
+				'posted_by' => ($this->getPostedBy() instanceof TBGIdentifiable) ? $this->getPostedBy()->getUsername(): null,
+				'status' => ($this->getStatus() instanceof TBGIdentifiable) ? $this->getStatus()->getName() : null,
 			);
 
 			$fields = $this->getProject()->getVisibleFieldsArray($this->getIssueType());
@@ -5022,7 +5021,7 @@
 						break;
 				}
 				if ($identifiable)
-					$return_values[$field] = ($value instanceof TBGIdentifiable) ? $value->toJSON() : null;
+					$return_values[$field] = ($value instanceof TBGIdentifiable) ? $value->getName() : null;
 				else
 					$return_values[$field] = $value;
 
