@@ -4959,7 +4959,7 @@
 				'issue_no' => $this->getFormattedIssueNo(),
 				'state' => $this->getState(),
 				'created_at' => $this->getPosted(),
-				'updated_at' => $this->getLastUpdatedTime(),
+				'last_updated' => $this->getLastUpdatedTime(),
 				'title' => $this->getTitle(),
 				'issuetype' => ($this->getIssueType() instanceof TBGIssueType) ? $this->getIssueType()->getName() : null,
 				'posted_by' => ($this->getPostedBy() instanceof TBGIdentifiable) ? $this->getPostedBy()->getUsername(): null,
