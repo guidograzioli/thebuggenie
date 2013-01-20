@@ -757,10 +757,22 @@
 
 			if (mb_strtolower($filter_issuetype) != 'all')
 			{
-				$issuetype = TBGIssuetype::getIssuetypeByKeyish($filter_issuetype);
-				if ($issuetype instanceof TBGIssuetype)
-				{
-					$filters['issuetype'] = array('operator' => '=', 'value' => $issuetype->getID());
+				$filter_issuetypes_array = explode(",", $filter_issuetype);
+				if (count($filter_issuetypes_array) > 1) {
+					$issuetype_list = array();
+					foreach ($filter_issuetypes_array as $key) {
+						$issuetype = TBGIssuetype::getIssuetypeByKeyish($key);
+						if ($issuetype instanceof TBGIssuetype) {
+							$issuetype_list[] = $issuetype->getID();
+						}
+					}
+					$filters['issuetype'] = array('operator' => 'IN', 'value' => $issuetype_list);
+				} else {
+					$issuetype = TBGIssuetype::getIssuetypeByKeyish($filter_issuetype);
+					if ($issuetype instanceof TBGIssuetype)
+					{
+						$filters['issuetype'] = array('operator' => '=', 'value' => $issuetype->getID());
+					}
 				}
 			}
 

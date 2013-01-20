@@ -571,7 +571,7 @@
 						$dbname = $this->getB2DBName();
 					}
 
-					if (array_key_exists('value', $filter_info) && in_array($filter_info['operator'], array('=', '!=', '<=', '>=', '<', '>')))
+					if (array_key_exists('value', $filter_info) && in_array($filter_info['operator'], array('=', '!=', '<=', '>=', '<', '>', 'IN')))
 					{
 						if ($filter == 'text')
 						{
@@ -640,7 +640,7 @@
 								{
 									foreach ($filter_info as $single_filter)
 									{
-										if (in_array($single_filter['operator'], array('=', '<=', '>=', '<', '>')) && !in_array($filter, array('posted', 'last_updated')))
+										if (in_array($single_filter['operator'], array('=', '<=', '>=', '<', '>', 'IN')) && !in_array($filter, array('posted', 'last_updated')))
 										{
 											$ctn->addOr($dbname.'.'.$filter, $single_filter['value'], urldecode($single_filter['operator']));
 										}
